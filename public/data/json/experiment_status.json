@@ -1,0 +1,167 @@
+[
+  {
+    "origin": "snc1",
+    "errors": [
+      {
+        "confidence": 0.999,
+        "name": "FinchErrors"
+      }
+    ],
+    "name": "finch-status",
+    "timestamp": 1378993024,
+    "buckets": "0..999",
+    "updated-at": "2013-03-25T09:38:01-05:00",
+    "guards": [
+      "on_receipt_page",
+      "eligibleForCreditCardAuthorization",
+      "not_on_ie6"
+    ],
+    "days-live": 170.75,
+    "state": "running",
+    "experiment": "CreditCardAuthorization",
+    "event-count": 187,
+    "duration": 10,
+    "variants": [
+      "CreditCardAuthorization"
+    ],
+    "browser-counts": {
+      "Chrome": 55,
+      "Firefox": 29,
+      "Mobile Safari": 13,
+      "IE": 72,
+      "Safari": 18
+    }
+  },
+  {
+    "origin": "snc1",
+    "errors": [
+      {
+        "confidence": 0.999,
+        "name": "FinchErrors"
+      }
+    ],
+    "name": "finch-status",
+    "timestamp": 1378993024,
+    "buckets": "0..999",
+    "updated-at": "2013-03-25T09:38:01-05:00",
+    "guards": [
+      "on_receipt_page",
+      "eligibleForCreditCardAuthorization",
+      "not_on_ie6"
+    ],
+    "days-live": 70.75,
+    "state": "running",
+    "experiment": "Hank",
+    "event-count": 187,
+    "duration": 10,
+    "variants": [
+      "CreditCardAuthorization"
+    ],
+    "browser-counts": {
+      "Chrome": 55,
+      "Firefox": 29,
+      "Mobile Safari": 13,
+      "IE": 72,
+      "Safari": 18
+    }
+  },
+  {
+    "origin": "snc1",
+    "errors": [
+      {
+        "confidence": 0.999,
+        "name": "FinchErrors"
+      }
+    ],
+    "name": "finch-status",
+    "timestamp": 1378993024,
+    "buckets": "0..999",
+    "updated-at": "2013-03-25T09:38:01-05:00",
+    "guards": [
+      "on_receipt_page",
+      "eligibleForCreditCardAuthorization",
+      "not_on_ie6"
+    ],
+    "days-live": 70.75,
+    "state": "running",
+    "experiment": "LiveAnimalsForSale",
+    "event-count": 187,
+    "duration": 10,
+    "variants": [
+      "CreditCardAuthorization"
+    ],
+    "browser-counts": {
+      "Chrome": 55,
+      "Firefox": 29,
+      "Mobile Safari": 13,
+      "IE": 72,
+      "Safari": 18
+    }
+  },
+  {
+    "origin": "snc1",
+    "errors": [
+      {
+        "confidence": 0.999,
+        "name": "FinchErrors"
+      }
+    ],
+    "name": "finch-status",
+    "timestamp": 1378993024,
+    "buckets": "0..999",
+    "updated-at": "2013-03-25T09:38:01-05:00",
+    "guards": [
+      "on_receipt_page",
+      "eligibleForCreditCardAuthorization",
+      "not_on_ie6"
+    ],
+    "days-live": 17.75,
+    "state": "running",
+    "experiment": "RedirectToLivingSocial",
+    "event-count": 187,
+    "duration": 10,
+    "variants": [
+      "CreditCardAuthorization"
+    ],
+    "browser-counts": {
+      "Chrome": 55,
+      "Firefox": 29,
+      "Mobile Safari": 13,
+      "IE": 72,
+      "Safari": 18
+    }
+  },
+  {
+    "origin": "snc1",
+    "errors": [
+      {
+        "confidence": 0.999,
+        "name": "FinchErrors"
+      }
+    ],
+    "name": "finch-status",
+    "timestamp": 1378993024,
+    "buckets": "0..999",
+    "updated-at": "2013-03-25T09:38:01-05:00",
+    "guards": [
+      "on_receipt_page",
+      "eligibleForCreditCardAuthorization",
+      "not_on_ie6"
+    ],
+    "days-live": 1.75,
+    "state": "running",
+    "experiment": "UndiscountedGroupons",
+    "event-count": 187,
+    "duration": 10,
+    "variants": [
+      "CreditCardAuthorization"
+    ],
+    "browser-counts": {
+      "Chrome": 55,
+      "Firefox": 29,
+      "Mobile Safari": 13,
+      "IE": 72,
+      "Safari": 18
+    }
+  }
+]

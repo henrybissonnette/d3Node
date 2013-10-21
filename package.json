@@ -1,0 +1,16 @@
+{
+  "name": "d3node",
+  "version": "0.0.0",
+  "description": "A basic server for hosting d3 vizualizations.",
+  "scripts": {
+    "start": "node_modules/.bin/coffee src/server.coffee"
+  },
+  "dependencies": {
+    "coffee-script-redux": "*",
+    "colors": "*",
+    "commonjs-everywhere": "*",
+    "d3": "*",
+    "express": "*",
+    "jquery": "*"
+  }
+}
