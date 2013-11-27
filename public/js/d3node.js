@@ -57,14 +57,15 @@
     var vis;
     vis = require('/src/client/visualizations/index.coffee', module);
     $(function () {
-      var el, renderSelectButton, renderSelector, visualizationWindow;
+      var $visualizationWindow, el, renderSelectButton, renderSelector;
       el = $('#selectors');
-      visualizationWindow = $('#visualization');
+      $visualizationWindow = $('#visualization');
       renderSelector = function (visualization) {
         var button;
         button = renderSelectButton(visualization.name);
         button.on('click', function () {
-          return visualization.render(visualizationWindow);
+          $visualizationWindow.empty();
+          return visualization.render($visualizationWindow);
         });
         return el.append(button);
       };
@@ -82,7 +83,119 @@
     });
   });
   require.define('/src/client/visualizations/index.coffee', function (module, exports, __dirname, __filename) {
-    module.exports = [require('/src/client/visualizations/experimentStatusDays.coffee', module)];
+    module.exports = [
+      require('/src/client/visualizations/experimentStatusDays.coffee', module),
+      require('/src/client/visualizations/stats.coffee', module)
+    ];
+  });
+  require.define('/src/client/visualizations/stats.coffee', function (module, exports, __dirname, __filename) {
+    module.exports = {
+      name: 'Stats',
+      includeStylesheet: function () {
+        var $head, el;
+        $head = $('head');
+        el = "<link href='/css/views/stats.css' media='all' rel='stylesheet' type='text/css' />";
+        return $head.append(el);
+      },
+      template: function (ctx) {
+        return "<svg class='graph'>\n  " + ctx + '\n</svg>';
+      },
+      circleTemplate: function (ctx) {
+        return '<circle cx=' + ctx.x_center + ' cy=' + ctx.y_center + ' r=' + ctx.radius + '></circle>';
+      },
+      render: function (parentElement) {
+        this.includeStylesheet();
+        this.$el = $(parentElement);
+        this.svgContent = '';
+        this.generatePoints(1e3, 500);
+        this.$el.append(this.template(this.svgContent));
+        return this.setSvgSize();
+      },
+      setSvgSize: function () {
+        if (!(this.maxX && this.maxY))
+          return;
+        return this.$el.find('svg').css({
+          height: this.maxY,
+          width: this.maxX
+        });
+      },
+      model: function () {
+        var error, intercept, slope;
+        slope = 1;
+        intercept = 10;
+        error = 100;
+        return function (x) {
+          return x * slope + intercept + Math.random() * (x + 25) / 2;
+        };
+      },
+      generateXValues: function (n, domain) {
+        var i, values;
+        if (null == domain)
+          domain = 100;
+        if (!n)
+          throw 'missing required argument n';
+        i = 0;
+        values = [];
+        while (i < n) {
+          values.push(Math.random() * domain);
+          i += 1;
+        }
+        return values;
+      },
+      setMaxY: function (yValues) {
+        return this.maxY = Math.max.apply(Math, [].slice.call(yValues).concat());
+      },
+      setMaxX: function (xValues) {
+        return this.maxX = Math.max.apply(Math, [].slice.call(xValues).concat());
+      },
+      generatePoints: function (n, domain) {
+        var correctedYValues, xValues, yValues;
+        if (null == domain)
+          domain = 100;
+        xValues = this.generateXValues(n, domain);
+        yValues = function (accum$) {
+          var x;
+          for (var i$ = 0, length$ = xValues.length; i$ < length$; ++i$) {
+            x = xValues[i$];
+            accum$.push(this.model()(x));
+          }
+          return accum$;
+        }.call(this, []);
+        this.setMaxX(xValues);
+        this.setMaxY(yValues);
+        correctedYValues = function (accum$) {
+          var y;
+          for (var i$ = 0, length$ = yValues.length; i$ < length$; ++i$) {
+            y = yValues[i$];
+            accum$.push(this.maxY - y);
+          }
+          return accum$;
+        }.call(this, []);
+        return function (accum$) {
+          var index, x, y;
+          for (index in xValues) {
+            x = xValues[index];
+            y = correctedYValues[index];
+            accum$.push(this.addCircle(x, y, 5));
+          }
+          return accum$;
+        }.call(this, []);
+      },
+      addCircle: function (x, y, r) {
+        return this.svgContent += this.circleTemplate({
+          x_center: x,
+          y_center: y,
+          radius: r
+        });
+      }
+    };
+    function construct$(ctor, args) {
+      var fn = function () {
+      };
+      fn.prototype = ctor.prototype;
+      var child = new fn, result = ctor.apply(child, args);
+      return result === Object(result) ? result : child;
+    }
   });
   require.define('/src/client/visualizations/experimentStatusDays.coffee', function (module, exports, __dirname, __filename) {
     module.exports = {

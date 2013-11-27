@@ -1,0 +1,9 @@
+.graph {
+  border: solid 1px #cccccc;
+  overflow: scroll;
+  padding: 10px;
+}
+
+circle {
+  opacity: 0.5;
+}

@@ -2,12 +2,13 @@ vis = require "../visualizations"
 
 $ ->
   el = $("#selectors")
-  visualizationWindow = $("#visualization")
+  $visualizationWindow = $("#visualization")
 
   renderSelector = (visualization) ->
     button = renderSelectButton(visualization.name)
     button.on "click", ->
-      visualization.render(visualizationWindow)
+      $visualizationWindow.empty()
+      visualization.render($visualizationWindow)
     el.append button
 
   renderSelectButton = (name) ->
